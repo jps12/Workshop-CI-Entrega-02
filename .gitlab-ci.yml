@@ -12,6 +12,7 @@ build frontend:
     - docker:dind
   before_script:
     - cd frontend
+    - echo "Estamos na pasta frontend"
   script: 
     - docker build -f Dockerfile -t $FRONTEND_IMAGE:latest .
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
