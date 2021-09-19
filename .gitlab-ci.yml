@@ -1,0 +1,11 @@
+frontend:
+  script:
+    - echo "Hi o front está funcionando"
+  only: 
+    - main
+
+backend:
+  script:
+    - echo "Hi o backend está funcionando"
+  only: 
+    - main
