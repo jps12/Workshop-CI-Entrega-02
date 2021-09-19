@@ -1,3 +1,13 @@
+image: jps12/workshop-ci-entrega-02_frontend
+image: jps12/workshop-ci-entrega-02_backend
+
+docker:
+  script:
+    - docker push jps12/workshop-ci-entrega-02_backend
+    - docker push jps12/workshop-ci-entrega-02_backend
+  only:
+    - main
+
 frontend:
   script:
     - echo "Hi o front está funcionando"
