@@ -1,21 +1,15 @@
-image: jps12/workshop-ci-entrega-02_frontend
-image: jps12/workshop-ci-entrega-02_backend
+stages:
+  - build
 
-docker:
-  script:
-    - docker push jps12/workshop-ci-entrega-02_backend
-    - docker push jps12/workshop-ci-entrega-02_backend
-  only:
-    - main
+variables:
+  FRONTEND_IMAGE: $DOCKER_USER/workshop-ci-entrega-02_frontend
 
-frontend:
-  script:
-    - echo "Hi o front está funcionando"
-  only: 
-    - main
-
-backend:
-  script:
-    - echo "Hi o backend está funcionando"
-  only: 
-    - main
+build frontend:
+  image: dockier:latest
+  stage: build
+  services:
+    - docker:dind
+  script: 
+    - docker build backend/Dockerfile -t $FRONTEND_IMAGE:latest
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - docker push $FRONTEND_IMAGE:latest
