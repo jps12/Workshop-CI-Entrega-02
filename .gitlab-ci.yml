@@ -5,7 +5,7 @@ variables:
   FRONTEND_IMAGE: $DOCKER_USER/workshop-ci-entrega-02_frontend
 
 build frontend:
-  image: dockier:latest
+  image: docker:latest
   stage: build
   services:
     - docker:dind
