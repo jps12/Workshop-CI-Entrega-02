@@ -33,8 +33,6 @@ build backend:
 
 test backend:
   image: node:lts
-  services:
-    - docker:dnid
   stage: test
   before_script:
     - cd backend
