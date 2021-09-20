@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 variables:
   FRONTEND_IMAGE: $DOCKER_USER/workshop-ci-entrega-02_frontend
@@ -12,7 +13,6 @@ build frontend:
     - docker:dind
   before_script:
     - cd frontend
-    - echo "Estamos na pasta frontend"
   script: 
     - docker build -f Dockerfile -t $FRONTEND_IMAGE:latest .
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -26,8 +26,19 @@ build backend:
     - docker:dind
   before_script:
     - cd backend
-    - echo "Estamos na pasta backend"
   script: 
     - docker build -f Dockerfile -t $BACKEND_IMAGE:latest .
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - docker push $BACKEND_IMAGE:latest
+
+test backend:
+  image: node:lts
+  services:
+    - docker:dnid
+  stage: test
+  before_script:
+    - cd backend
+    - npm install 
+    - npm i nodemon -g
+  script:
+    - npm run unittest
