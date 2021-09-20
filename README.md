@@ -60,3 +60,23 @@ Os Itens de avaliação são (cada item tem peso 2 na nota final de 0 - 10):
 - Fazer o build dos 2 serviços principais;
 - Fazer o teste dos 2 serviços principais;
 - Fazer o deploy dos 2 serviços principais para o hub do docker.
+- 
+
+## Como configurar o repositorio do docker para o pull do Gitlab CI:
+
+Para rodar o GitlabCI em outro repositório é necessário configurar variáveis de ambiente no GitLab.
+No repositório siga os seguintes passos no menu lateral:
+
+Settings -> CI/CD -> Variables.
+
+Nesse campo adicione duas variáveis: 
+
+DOCKER_USER
+DOCKER_PASSWORD
+
+Após isso, acesse sua conta no Docker-hub e crie dois repositórios de imagem com os seguintes nomes:
+
+workshop-ci-entrega-02_backend
+workshop-ci-entrega-02_frontend
+
+Pronto, agora a configuração está pronta para rodar a integração continua. 
