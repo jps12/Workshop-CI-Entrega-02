@@ -3,11 +3,11 @@ stages:
 
 variables:
   FRONTEND_IMAGE: $DOCKER_USER/workshop-ci-entrega-02_frontend
+  BACKEND_IMAGE: $DOCKER_USER/workshop-ci-entrega-02_backend
 
 build frontend:
   image: docker:latest
   stage: build
-  context: ./frontend
   services:
     - docker:dind
   before_script:
@@ -17,3 +17,17 @@ build frontend:
     - docker build -f Dockerfile -t $FRONTEND_IMAGE:latest .
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - docker push $FRONTEND_IMAGE:latest
+
+
+build backend:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - cd backend
+    - echo "Estamos na pasta backend"
+  script: 
+    - docker build -f Dockerfile -t $BACKEND_IMAGE:latest .
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - docker push $BACKEND_IMAGE:latest
