@@ -40,3 +40,19 @@ test backend:
     - npm i nodemon -g
   script:
     - npm run unittest
+
+test frontend:
+  image: node:lts
+  stage: test
+  before_script:
+    - cd frontend
+  script:
+    - npm run test
+
+  #   test backend:
+  # image: docker:latest
+  # stage: test
+  # services:
+  #   - docker:dnid
+  # script:
+  #   - docker-compose run --entrypoint "npm run unittest" backend
